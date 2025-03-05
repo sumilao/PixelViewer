@@ -14,7 +14,7 @@ namespace Carina.PixelViewer.Media.ImageRenderers
 		/// <summary>
 		/// Intiaize new <see cref="Argb1555ImageRenderer"/> instance.
 		/// </summary>
-		public Argb1555ImageRenderer() : base(new ImageFormat(ImageFormatCategory.RGB, "ARGB_1555", true, new ImagePlaneDescriptor(2), new string[]{ "ARGB1555", "ARGB_1555", "ARGB16" }))
+		public Argb1555ImageRenderer() : base(new ImageFormat(ImageFormatCategory.ARGB, "ARGB_1555", true, new ImagePlaneDescriptor(2), new string[]{ "ARGB1555", "ARGB_1555"}))
 		{ }
 
 
@@ -51,13 +51,17 @@ namespace Carina.PixelViewer.Media.ImageRenderers
 						for (var x = width; x > 0; --x, pixelPtr += pixelStride, bitmapPixelPtr += 4)
 						{
 							var argb1555 = pixelConversionFunc(pixelPtr[0], pixelPtr[1]);
-							var r = (argb1555 >> 11) & 0x1f;
-							var g = (argb1555 >> 5) & 0x3f;
+							var a = (argb1555 >> 15) & 0x1;
+							var r = (argb1555 >> 10) & 0x1f;
+							var g = (argb1555 >> 5) & 0x1f;
 							var b = argb1555 & 0x1f;
-							bitmapPixelPtr[0] = (byte)((b << 3) | (b >> 2)); // extend from 5 bits to 8 bits
-							bitmapPixelPtr[1] = (byte)((g << 2) | (g >> 4)); // extend from 6 bits to 8 bits
-							bitmapPixelPtr[2] = (byte)((r << 3) | (r >> 2)); // extend from 5 bits to 8 bits
-							bitmapPixelPtr[3] = 255;
+							// bitmapPixelPtr[0] = (byte)((b << 3) | (b >> 2)); // extend from 5 bits to 8 bits
+							// bitmapPixelPtr[1] = (byte)((g << 3) | (g >> 2)); // extend from 5 bits to 8 bits
+							// bitmapPixelPtr[2] = (byte)((r << 3) | (r >> 2)); // extend from 5 bits to 8 bits
+							bitmapPixelPtr[0] = (byte)(b << 3); // extend from 5 bits to 8 bits
+							bitmapPixelPtr[1] = (byte)(g << 3); // extend from 5 bits to 8 bits
+							bitmapPixelPtr[2] = (byte)(r << 3); // extend from 5 bits to 8 bits
+							bitmapPixelPtr[3] = (byte)((1 == a) ? 255 : 0);
 						}
 						if (isLastRow || cancellationToken.IsCancellationRequested)
 							break;
