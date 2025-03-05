@@ -53,6 +53,8 @@ static class ImageRenderers
 			new Argb8888ImageRenderer(),
 			new Bgra8888ImageRenderer(),
 			new Rgba8888ImageRenderer(),
+			new Argb1555ImageRenderer(),
+			new Argb4444ImageRenderer(),
 			new Abgr2101010ImageRenderer(),
 			new Argb2101010ImageRenderer(),
 			new Bgra1010102ImageRenderer(),

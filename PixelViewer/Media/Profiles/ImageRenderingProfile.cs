@@ -467,6 +467,26 @@ namespace Carina.PixelViewer.Media.Profiles
                             profile.byteOrdering = ByteOrdering.LittleEndian;
                             profile.IsUpgradedWhenLoading = true;
                             break;
+                        case "ARGB_1555_BE":
+                            formatName = "ARGB_1555";
+                            profile.byteOrdering = ByteOrdering.BigEndian;
+                            profile.IsUpgradedWhenLoading = true;
+                            break;
+                        case "ARGB_1555_LE":
+                            formatName = "ARGB_1555";
+                            profile.byteOrdering = ByteOrdering.LittleEndian;
+                            profile.IsUpgradedWhenLoading = true;
+                            break;
+                        case "ARGB_4444_BE":
+                            formatName = "ARGB_4444";
+                            profile.byteOrdering = ByteOrdering.BigEndian;
+                            profile.IsUpgradedWhenLoading = true;
+                            break;
+                        case "ARGB_4444_LE":
+                            formatName = "ARGB_4444";
+                            profile.byteOrdering = ByteOrdering.LittleEndian;
+                            profile.IsUpgradedWhenLoading = true;
+                            break;
                         case "RGGB_16":
                             formatName = "Bayer_Pattern_16";
                             profile.bayerPattern = BayerPattern.RGGB_2x2;
