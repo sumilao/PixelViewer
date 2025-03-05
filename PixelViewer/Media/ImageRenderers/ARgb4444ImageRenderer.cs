@@ -51,9 +51,9 @@ namespace Carina.PixelViewer.Media.ImageRenderers
 						for (var x = width; x > 0; --x, pixelPtr += pixelStride, bitmapPixelPtr += 4)
 						{
 							var argb4444 = pixelConversionFunc(pixelPtr[0], pixelPtr[1]);
-							var a = (argb4444 >> 4) & 0xf;
-							var r = (argb4444 >> 4) & 0xf;
-							var g = (argb4444 >> 4) & 0xf;
+							var a = (argb4444 >> 12) & 0xf;
+							var r = (argb4444 >> 8 ) & 0xf;
+							var g = (argb4444 >> 4 ) & 0xf;
 							var b = argb4444 & 0xf;
 							bitmapPixelPtr[0] = (byte)(b * 17); // extend from 5 bits to 8 bits
 							bitmapPixelPtr[1] = (byte)(g * 17); // extend from 6 bits to 8 bits
