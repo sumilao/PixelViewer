@@ -22,7 +22,7 @@ fi
 # Create output directory
 if [[ ! -d "./Packages/$VERSION" ]]; then
     echo "Create directory 'Packages/$VERSION'"
-    mkdir ./Packages/$VERSION
+    mkdir -p ./Packages/$VERSION
     if [ "$?" != "0" ]; then
         exit
     fi
@@ -54,7 +54,8 @@ for i in "${!RID_LIST[@]}"; do
     fi
 
     # zip package
-    ditto -c -k --sequesterRsrc "./$APP_NAME/bin/$CONFIG/$FRAMEWORK/$RID/publish/" "./Packages/$VERSION/$APP_NAME-$VERSION-$RID.zip"
+    # ditto -c -k --sequesterRsrc "./$APP_NAME/bin/$CONFIG/$FRAMEWORK/$RID/publish/" "./Packages/$VERSION/$APP_NAME-$VERSION-$RID.zip"
+    zip -r "./Packages/$VERSION/$APP_NAME-$VERSION-$RID.zip" "./$APP_NAME/bin/$CONFIG/$FRAMEWORK/$RID/publish/"
     if [ "$?" != "0" ]; then
         exit
     fi
